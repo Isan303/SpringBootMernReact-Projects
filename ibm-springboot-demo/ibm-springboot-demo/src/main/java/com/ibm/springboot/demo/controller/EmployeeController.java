@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ibm.springboot.demo.model.Department;
 import com.ibm.springboot.demo.model.Employee;
 import com.ibm.springboot.demo.service.EmployeeService;
 
 @RestController
 @RequestMapping("emp")
+@CrossOrigin("*")
 public class EmployeeController {
 
 	@Autowired
@@ -77,6 +81,15 @@ public class EmployeeController {
 	}
 
 
+	@DeleteMapping("delete-emp/{eid}")
+	public ResponseEntity<Employee> deleteEmp(@PathVariable(name = "eid") String employeeId) {
+		Employee employeeToBeDeleted = employeeService.deleteEmployee(employeeId);
+		HttpStatus status = HttpStatus.OK;
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("message", "Employee added successfully!");
+		ResponseEntity<Employee> response = new ResponseEntity<Employee>(employeeToBeDeleted, headers, status);
+		return response;
+	}
 
 
 

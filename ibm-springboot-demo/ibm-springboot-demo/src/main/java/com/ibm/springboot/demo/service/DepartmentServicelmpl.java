@@ -93,6 +93,18 @@ public class DepartmentServicelmpl implements DepartmentService{
 	
 	}
 
+	@Override
+	public Department updateDepartment(Department department) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Department updateDepartment(String did, Department updatedDepartment) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 
